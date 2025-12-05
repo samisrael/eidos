@@ -1,21 +1,17 @@
-const express = require('express')
-const verifyToken = require('../middlewares/authMiddleware')
-const authorizeRoles = require('../middlewares/roleMiddleware')
+const express = require("express");
 const router = express.Router();
 
-//Admin only
-router.get("/admin", verifyToken, authorizeRoles("admin"), (req, res) => {
-    res.json({message: "Welcome Admin"})
-})
+const {
+  login,
+  register,
+  dashboard,
+  getAllUsers,
+} = require("../controllers/authController");
+const authMiddleware = require("../middlewares/authMiddleware");
 
-//Admin & Manager
-router.get("/manager", verifyToken, authorizeRoles("admin", "manager"), (req, res) => {
-  res.json({ message: "Welcome Manager" });
-});
+router.route("/login").post(login);
+router.route("/register").post(register);
+router.route("/dashboard").get(authMiddleware, dashboard);
+router.route("/users").get(getAllUsers);
 
-//Everyone
-router.get("/user", verifyToken, authorizeRoles("admin", "manager", "user"), (req, res) => {
-  res.json({ message: "Welcome User" });
-});
-
-module.exports = router
+module.exports = router;

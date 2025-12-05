@@ -1,23 +1,28 @@
-const express = require('express');
-const dotenv = require('dotenv').config();
-const dbConnect = require('./config/dbConnect');
-const authRoutes = require('./routes/authRoutes')
-const userRoutes = require('./routes/userRoutes')
+require("dotenv").config();
+// require("express-async-errors");
 
-dbConnect();
-
+const connectDB = require("./config/dbConnect");
+const express = require("express");
+const cors = require("cors");
 const app = express();
+const mainRouter = require("./routes/userRoutes");
 
-//Middleware
 app.use(express.json());
 
-//Routes
-app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/users", userRoutes);
+app.use(cors());
+app.use("/api/v1", mainRouter);
 
+const port = process.env.PORT || 3000;
 
-//Server
-const PORT = process.env.PORT || 7002;
-app.listen(PORT, () => {
-    console.log(`Server is running at port http://localhost:${PORT}`);
-})
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(port, () => {
+      console.log(`Server is listening on port ${port}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
