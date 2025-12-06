@@ -1,19 +1,29 @@
 .dashboard-main{
     font-size: 30px;
-    height: 100vh;
+    height: 20vh;
     width: 100%;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .dashboard-main p{
   font-size: 20px;
-  padding: 0 20px
-}
+  padding: 0 20px;
+  display: flex;
 
+}
+.model{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
 .logout-button{
     background: black;
     color: white;
@@ -21,12 +31,12 @@
     transition: background 1s linear 0ms;
     transition: color 500ms linear 0ms;
 
-    width: 500px;
-    padding: 16px;
+    width: 100px;
+    padding: 4;
     border-radius: 4px;
     cursor: pointer;
     border-radius: 30px;
-    font-weight: 600;
+    font-weight: 400;
     margin-top: 10px;
 
     font-size: 20px;

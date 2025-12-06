@@ -3,6 +3,7 @@ import "./DashboardComponent.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import AnimalPredictionComponent from "../AnimalPredictComponent/AnimalPredictComponent";
 
 const DashboardComponent = () => {
   const [token, setToken] = useState(
@@ -38,14 +39,16 @@ const DashboardComponent = () => {
   }, [token]);
 
   return (
-    <div className="dashboard-main">
-      <h1>Dashboard</h1>
-      <p>
-        Hi {data.msg}! {data.luckyNumber}
-      </p>
-      <Link to="/logout" className="logout-button">
-        Logout
-      </Link>
+    <div>
+      <div className="dashboard-main">
+        <h1>Dashboard</h1>
+        <Link to="/logout" className="logout-button">
+          Logout
+        </Link>
+      </div>
+      <div className="model">
+        <AnimalPredictionComponent />
+      </div>
     </div>
   );
 };
