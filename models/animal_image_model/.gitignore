@@ -1,0 +1,43 @@
+# Virtual environment
+venv/
+.env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Model artifacts
+*.h5
+*.ckpt
+*.pb
+*.onnx
+
+# Dataset and generated files
+dataset/
+data/
+logs/
+
+# IDE and OS files
+.vscode/
+.idea/
+*.swp
+*.DS_Store
+Thumbs.db
+
+# Test and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets
+*.env
