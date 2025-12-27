@@ -1,54 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./DashboardComponent.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
-import axios from "axios";
-import AnimalPredictionComponent from "../AnimalPredictComponent/AnimalPredictComponent";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import { FaImage, FaMusic } from "react-icons/fa";
 
 const DashboardComponent = () => {
-  const [token, setToken] = useState(
-    JSON.parse(localStorage.getItem("auth")) || ""
-  );
-  const [data, setData] = useState({});
   const navigate = useNavigate();
 
-  const fetchLuckyNumber = async () => {
-    let axiosConfig = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    try {
-      const response = await axios.get(
-        "http://localhost:7001/api/v1/dashboard",
-        axiosConfig
-      );
-      setData({ msg: response.data.msg, luckyNumber: response.data.secret });
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+  const auth = localStorage.getItem("auth");
+  const token = auth ? JSON.parse(auth) : null;
 
   useEffect(() => {
-    fetchLuckyNumber();
-    if (token === "") {
-      navigate("/login");
+    if (!token) {
       toast.warn("Please login first to access dashboard");
+      navigate("/login", { replace: true });
     }
-  }, [token]);
+  }, [token, navigate]);
 
   return (
-    <div>
-      <div className="dashboard-main">
+    <div className="dashboard-container">
+      <header className="dashboard-main">
         <h1>Dashboard</h1>
         <Link to="/logout" className="logout-button">
           Logout
         </Link>
-      </div>
-      <div className="model">
-        <AnimalPredictionComponent />
-      </div>
+      </header>
+
+      {/* Dashboard cards */}
+      <section className="model">
+        <Card className="model-card">
+          <div className="model-card-img">
+            <FaImage className="model-card-icon" />
+          </div>
+
+          <Card.Body>
+            <Card.Title>Image Models</Card.Title>
+            <Card.Text>
+              Animal, Bird and Flower image classification using deep learning
+              models.
+            </Card.Text>
+
+            <Button onClick={() => navigate("/image-prediction")}>
+              Take me there
+            </Button>
+          </Card.Body>
+        </Card>
+
+        <Card className="model-card">
+          <div className="model-card-img">
+            <FaMusic className="model-card-icon" />
+          </div>
+
+          <Card.Body>
+            <Card.Title>Audio Models</Card.Title>
+            <Card.Text>
+              Animal and Bird audio classification using deep learning models.
+            </Card.Text>
+            <Button onClick={() => navigate("/animal-sound")}>
+              Take me there
+            </Button>
+          </Card.Body>
+        </Card>
+      </section>
+
     </div>
   );
 };
