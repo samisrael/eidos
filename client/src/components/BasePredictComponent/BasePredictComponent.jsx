@@ -67,7 +67,7 @@ const BasePredictComponent = ({
   form.append("file", file);
 
   try {
-    // 1️⃣ Call model API (FastAPI)
+
     const modelRes = await fetch(apiUrl, {
       method: "POST",
       body: form,
@@ -81,7 +81,6 @@ const BasePredictComponent = ({
     const modelJson = await modelRes.json();
     const species = modelJson.label;
 
-    // 2️⃣ Call Node backend (Wikipedia enrichment)
     const wikiRes = await fetch(
       "http://localhost:7001/api/v1/predict",
       {
@@ -97,7 +96,7 @@ const BasePredictComponent = ({
 
     const wikiJson = await wikiRes.json();
 
-    // 3️⃣ Merge result
+
     setResult({
       label: species,
       confidence: modelJson.confidence,
@@ -120,7 +119,19 @@ const BasePredictComponent = ({
       <form onSubmit={handleSubmit}>
         <label className="upload-label">{inputLabel}</label>
 
-        <input type="file" accept={accept} onChange={handleChange} />
+<div className="file-input-wrapper">
+  <input
+    id="file-input"
+    type="file"
+    accept={accept}
+    onChange={handleChange}
+  />
+
+  <label htmlFor="file-input" className="file-input-label">
+    {file ? file.name : "Choose file"}
+  </label>
+</div>
+
 
         {previewUrl && previewType === "image" && (
           <img src={previewUrl} alt="preview" className="preview-img" />

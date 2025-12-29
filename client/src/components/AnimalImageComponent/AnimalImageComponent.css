@@ -1,0 +1,40 @@
+/* ===== Root ===== */
+
+.predict-root {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ===== Ballpit Background ===== */
+
+.predict-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Optional per-page tuning */
+
+
+/* ===== Foreground ===== */
+
+.predict-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Optional glass wrapper for BasePredictComponent */
+.predict-content > * {
+  background: rgba(10, 20, 45, 0.55);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  padding: 28px;
+}

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import "./DashboardComponent.css";
-import { Link, useNavigate, Outlet } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { FaImage, FaMusic } from "react-icons/fa";
+import Aurora from "../Aurora/Aurora";
 
 const DashboardComponent = () => {
   const navigate = useNavigate();
@@ -20,51 +21,63 @@ const DashboardComponent = () => {
   }, [token, navigate]);
 
   return (
-    <div className="dashboard-container">
-      <header className="dashboard-main">
-        <h1>Dashboard</h1>
-        <Link to="/logout" className="logout-button">
-          Logout
-        </Link>
-      </header>
+    <div className="dashboard-root">
+      {/* Aurora background */}
+      <div className="dashboard-aurora">
+        <Aurora
+          colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.5}
+        />
+      </div>
 
-      {/* Dashboard cards */}
-      <section className="model">
-        <Card className="model-card">
-          <div className="model-card-img">
-            <FaImage className="model-card-icon" />
-          </div>
+      {/* Foreground content */}
+      <div className="dashboard-container">
+        <header className="dashboard-main">
+          <h1>Dashboard</h1>
+          <Link to="/logout" className="logout-button">
+            Logout
+          </Link>
+        </header>
 
-          <Card.Body>
-            <Card.Title>Image Models</Card.Title>
-            <Card.Text>
-              Animal, Bird and Flower image classification using deep learning
-              models.
-            </Card.Text>
+        <section className="model">
+          <Card className="model-card">
+            <div className="model-card-img">
+              <FaImage className="model-card-icon" />
+            </div>
 
-            <Button onClick={() => navigate("/image-prediction")}>
-              Take me there
-            </Button>
-          </Card.Body>
-        </Card>
+            <Card.Body>
+              <Card.Title>Image Models</Card.Title>
+              <Card.Text>
+                Animal, Bird and Flower image classification using deep learning
+                models.
+              </Card.Text>
 
-        <Card className="model-card">
-          <div className="model-card-img">
-            <FaMusic className="model-card-icon" />
-          </div>
+              <Button onClick={() => navigate("/image-prediction")}>
+                Take me there
+              </Button>
+            </Card.Body>
+          </Card>
 
-          <Card.Body>
-            <Card.Title>Audio Models</Card.Title>
-            <Card.Text>
-              Animal and Bird audio classification using deep learning models.
-            </Card.Text>
-            <Button onClick={() => navigate("/animal-sound")}>
-              Take me there
-            </Button>
-          </Card.Body>
-        </Card>
-      </section>
+          <Card className="model-card">
+            <div className="model-card-img">
+              <FaMusic className="model-card-icon" />
+            </div>
 
+            <Card.Body>
+              <Card.Title>Audio Models</Card.Title>
+              <Card.Text>
+                Animal and Bird audio classification using deep learning models.
+              </Card.Text>
+
+              <Button onClick={() => navigate("/animal-sound")}>
+                Take me there
+              </Button>
+            </Card.Body>
+          </Card>
+        </section>
+      </div>
     </div>
   );
 };

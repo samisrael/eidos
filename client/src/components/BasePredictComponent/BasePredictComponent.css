@@ -1,30 +1,33 @@
-/* Root container */
+/* Root container (transparent, blends with background) */
 .predict-container {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   padding: 2rem;
-  background-color: #f6f8fb;
-  min-height: calc(100vh - 280px);
+  background: transparent;
+  min-height: calc(100vh - 100px);
 }
 
-/* Form wrapper */
+/* Form wrapper (glass surface) */
 .predict-container form {
   width: 100%;
   max-width: 520px;
-  background: #ffffff;
+  background: rgba(10, 18, 40, 0.55);
+  backdrop-filter: blur(16px);
   padding: 2rem;
-  border-radius: 14px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  border-radius: 18px;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   margin: 0.9em;
 }
 
 /* Upload label */
 .upload-label {
   display: block;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 600;
-  color: #1f2937;
+  color: #e5e7eb;
   margin-bottom: 0.75rem;
 }
 
@@ -32,16 +35,17 @@
 .predict-container input[type="file"] {
   width: 100%;
   padding: 0.6rem;
-  border: 2px dashed #cbd5e1;
+  border: 2px dashed rgba(255, 255, 255, 0.35);
   border-radius: 10px;
-  background-color: #f9fafb;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #e5e7eb;
   cursor: pointer;
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .predict-container input[type="file"]:hover {
-  border-color: #2563eb;
-  background-color: #f1f5f9;
+  border-color: #93c5fd;
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 /* Image preview */
@@ -51,8 +55,8 @@
   max-height: 280px;
   object-fit: contain;
   border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  background-color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 /* Audio preview */
@@ -72,7 +76,7 @@ audio {
 .btn-row button {
   flex: 1;
   padding: 0.75rem;
-  border-radius: 10px;
+  border-radius: 999px;
   border: none;
   font-size: 1rem;
   font-weight: 500;
@@ -82,66 +86,93 @@ audio {
 
 /* Predict button */
 .btn-row button[type="submit"] {
-  background-color: #25190c;
+  background: linear-gradient(135deg, #2563eb, #1e3a8a);
   color: #ffffff;
 }
 
 .btn-row button[type="submit"]:hover {
-  background-color: #533414;
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
 }
 
 .btn-row button[type="submit"]:disabled {
-  background-color: #9ca3af;
+  background: rgba(148, 163, 184, 0.4);
   cursor: not-allowed;
 }
 
 /* Clear button */
 .btn-row button[type="button"] {
-  background-color: #e5e7eb;
-  color: #111827;
+  background: rgba(255, 255, 255, 0.15);
+  color: #e5e7eb;
 }
 
 .btn-row button[type="button"]:hover {
-  background-color: #d1d5db;
+  background: rgba(255, 255, 255, 0.25);
 }
 
 /* Error text */
 .error-text {
   margin-top: 1.2rem;
-  color: #dc2626;
+  color: #fca5a5;
   font-size: 0.95rem;
   text-align: center;
 }
 
-/* Result card */
+/* Result card (glass, not solid) */
 .result-card {
   margin-top: 1.5rem;
   padding: 1.5rem;
-  border-radius: 14px;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-
-/* Predicted label */
-.result-label {
-  font-size: 1.1rem;
+/* Prediction title */
+.prediction-title {
+  font-size: 0.9rem;
   font-weight: 600;
-  color: #111827;
+  color: #94a3b8;
   margin-bottom: 0.4rem;
 }
 
-/* Raw JSON output */
-.raw-json {
-  margin-top: 0.8rem;
-  padding: 0.8rem;
-  background-color: #ffffff;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  color: #374151;
-  max-height: 200px;
-  overflow-y: auto;
-  border: 1px solid #e5e7eb;
+/* Prediction value */
+.prediction-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+
+/* Confidence row */
+.confidence-row {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #cbd5f5;
+  margin-bottom: 0.3rem;
+}
+
+.confidence-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Confidence bar */
+.confidence-bar {
+  width: 100%;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+/* Confidence fill */
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #60a5fa, #2563eb);
+  border-radius: 999px;
+  transition: width 0.4s ease;
 }
 
 /* Responsive */
@@ -158,48 +189,53 @@ audio {
     flex-direction: column;
   }
 }
+/* ===== Custom File Input ===== */
 
-.prediction-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #64748b;
-  margin-bottom: 0.5rem;
+.file-input-wrapper {
+  position: relative;
+  margin-top: 0.75rem;
 }
 
-/* Predicted label */
-.prediction-value {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 1rem;
-  text-transform: capitalize;
+/* Hide native input but keep it accessible */
+.file-input-wrapper input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
 }
 
-/* Confidence row */
-.confidence-row {
+/* Styled label acts as button */
+.file-input-label {
   display: flex;
-  flex-direction: column;
-  font-size: 0.9rem;
-  color: #374151;
-  margin-bottom: 0.3rem;
-}
-.confidence-title{
-    font-weight: 600;
-    font-size: 1.2rem;
-}
-/* Confidence bar */
-.confidence-bar {
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
-  height: 10px;
-  background-color: #e5e7eb;
-  border-radius: 999px;
-  overflow: hidden;
+  min-height: 48px;
+
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+
+  border: 2px dashed rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+
+  color: #e5e7eb;
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
 }
 
-/* Confidence fill */
-.confidence-fill {
-  height: 100%;
-  background: linear-gradient(135deg, #945d22cc, #25190c);
-  border-radius: 999px;
-  transition: width 0.4s ease;
+/* Hover */
+.file-input-label:hover {
+  border-color: #60a5fa;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Focus accessibility */
+.file-input-wrapper input[type="file"]:focus + .file-input-label {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
 }
